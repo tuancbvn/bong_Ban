@@ -1,0 +1,81 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --hue: 200;
+    /*  Hue tông màu là các họ màu – nó là tổ hợp của 12 họ màu đậm nhạt khác nhau với gốc là 12 màu trên vòng tròn màu cơ bản (color wheel). */
+    --saturation: 50%;
+    /*  saturation ( dộ bão hòa ) là cường độ màu sắc*/
+    --foreground-color: hsl(var(--hue), var(--saturation), 75%);
+    /* Foreground là lớp ảnh gần nhất chứa màu sắc được tô, các nét vẽ màu, bút chì */
+    --background-color: hsl(var(--hue), var(--saturation), 20%);
+    /* background-color màu áp dụng cho nền
+    Background là phông nền của ảnh, là lớp ảnh phía ngoài cùng chứa nền của ảnh như cảnh vật, mây, trời, không gian */
+  }
+  
+  body {
+    margin: 0;
+    background-color: var(--background-color);
+    overflow: hidden;
+  }
+  
+  .paddle {
+    --position: 50;
+  
+    position: absolute;
+    background-color: var(--foreground-color);
+    top: calc(var(--position) * 1vh);
+    transform: translateY(-50%);
+    width: 1vh;   
+    /*1vh Viewport Height (vh) bằng 1% chiều cao của khung nhìn  */
+    height: 10vh;
+  }
+  
+  .paddle.left {
+    left: 1vw;
+    /* 1vw Viewport Width (vw) bằng 1% chiều rộng khung nhìn */
+  }
+  
+  .paddle.right {
+    right: 1vw;
+  }
+  
+  .ball {
+    --x: 50;
+    --y: 50;
+  
+    position: absolute;
+    background-color: var(--foreground-color);
+    left: calc(var(--x) * 1vw);
+    top: calc(var(--y) * 1vh);
+    border-radius: 50%; 
+    /* hình tròn thay vì là hình vuông */
+    transform: translate(-50%, -50%);
+    width: 2.5vh;
+    height: 2.5vh;
+  }
+  
+  .score {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 7vh;
+    color: var(--foreground-color);
+  }
+  
+  .score > * {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 0 2vh;
+    /* khoảng cách giữa hai điểm số */
+    margin: 1vh 0;
+    opacity: .5;
+    /*  opacity độ mờ */
+  }
+  
+  .score > :first-child {
+    text-align: right;
+    border-right: .5vh solid var(--foreground-color);
+    /* thanh chắn giữa điểm số  */
+  }
